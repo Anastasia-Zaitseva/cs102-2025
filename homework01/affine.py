@@ -17,4 +17,3 @@ def encrypt_affine(plaintext: str, a: int, b: int) -> str:
         else:
             ciphertext += char
     return ciphertext
-
