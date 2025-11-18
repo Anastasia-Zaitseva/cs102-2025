@@ -9,7 +9,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     'LXFOPVEFRNHR'
     """
     ciphertext = ""
-    extended_keyword = (keyword * (len(plaintext) // len(keyword) + 1))[:len(plaintext)]
+    extended_keyword = (keyword * (len(plaintext) // len(keyword) + 1))[: len(plaintext)]
 
     num_A = ord("A")
     num_Z = ord("Z")
@@ -39,7 +39,7 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    extended_keyword = (keyword * (len(ciphertext) // len(keyword) + 1))[:len(ciphertext)]
+    extended_keyword = (keyword * (len(ciphertext) // len(keyword) + 1))[: len(ciphertext)]
     num_A = 65
     for pos, char in enumerate(ciphertext):
         shift = ord(extended_keyword[pos].upper()) - num_A

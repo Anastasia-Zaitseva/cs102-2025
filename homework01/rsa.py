@@ -44,9 +44,9 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     23
     """
 
-    '''
+    """
     some code in while/for or smth
-    '''
+    """
 
     x0, x1 = 0, 1
     a, b = e, phi
