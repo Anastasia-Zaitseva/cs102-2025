@@ -1,6 +1,7 @@
 import pathlib
 import typing as tp
 import random
+import time
 
 T = tp.TypeVar("T")
 
@@ -229,9 +230,11 @@ def run_solve(filename: str) -> None:
 
 if __name__ == "__main__":
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
-        t = threading.Thread(target=run_solve, args=(filename,))
-        t.start()
         grid = read_sudoku(fname)
+        start = time.time()
+        solve(grid)
+        end = time.time()
+        print(f"{fname}: {end - start}")
         display(grid)
         solution = solve(grid)
         if not solution:
