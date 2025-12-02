@@ -40,14 +40,18 @@ if __name__ == "__main__":
     N, M = 51, 77
 
     CELL_SIZE = 10
-    trying_grid = bin_tree_maze(N, M)
-    while not solve_maze(deepcopy(trying_grid))[1]:
-        try_grid = bin_tree_maze(N, M)
+
+    while True:
+        trying_grid = bin_tree_maze(N, M)
+        if solve_maze(deepcopy(trying_grid))[1]:
+            break
+
     GRID = trying_grid
 
     window = tk.Tk()
     window.title("Maze")
     window.geometry("%dx%d" % (M * CELL_SIZE + 100, N * CELL_SIZE + 100))
+    canvas = tk.Canvas(window, width=M * CELL_SIZE, height=N * CELL_SIZE)
 
     canvas = tk.Canvas(window, width=M * CELL_SIZE, height=N * CELL_SIZE)
 

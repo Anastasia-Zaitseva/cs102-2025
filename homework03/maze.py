@@ -86,7 +86,7 @@ def get_exits(grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
     for x, row in enumerate(grid):
         for y, cell in enumerate(row):
             if cell != "X":
-               continue
+                continue
             exits.append((x, y))
     return exits
 
@@ -109,9 +109,9 @@ def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str,
                 continue
             neighbors = [(x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y)]
             for coord_x, coord_y in neighbors:
-                if rows > coord_x >= 0 == grid[coord_x][coord_y] \
-                        and 0 <= coord_y < cols:
-                    grid[coord_x][coord_y] = next_k
+                if 0 <= coord_x < rows and 0 <= coord_y < cols:
+                    if grid[coord_x][coord_y] == 0:
+                        grid[coord_x][coord_y] = next_k
     return grid
 
 
@@ -136,9 +136,7 @@ def shortest_path(
             break
         neighbors = [(x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y)]
         for coord_x, coord_y in neighbors:
-            if 0 <= coord_x < rows \
-                    and 0 <= coord_y < cols \
-                    and grid[coord_x][coord_y] == k:
+            if 0 <= coord_x < rows and 0 <= coord_y < cols and grid[coord_x][coord_y] == k:
                 path.append((coord_x, coord_y))
                 x, y = coord_x, coord_y
                 break
