@@ -81,8 +81,9 @@ def get_exits(grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
     exits = []
     for x, row in enumerate(grid):
         for y, cell in enumerate(row):
-            if cell == "X":
-                exits.append((x, y))
+            if cell != "X":
+               continue
+            exits.append((x, y))
     return exits
 
 
@@ -97,14 +98,16 @@ def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str,
     rows = len(grid)
     cols = len(grid[0])
 
-    next = k + 1
+    nt = k + 1
     for x in range(rows):
         for y in range(cols):
-            if grid[x][y] == k:
-                neighbors = [(x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y)]
-                for coord_x, coord_y in neighbors:
-                    if 0 <= coord_x < rows and 0 <= coord_y < cols and grid[coord_x][coord_y] == 0:
-                        grid[coord_x][coord_y] = next
+            if grid[x][y] != k:
+                continue
+            neighbors = [(x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y)]
+            for coord_x, coord_y in neighbors:
+                if rows > coord_x >= 0 == grid[coord_x][coord_y] \
+                        and 0 <= coord_y < cols:
+                    grid[coord_x][coord_y] = nt
     return grid
 
 
@@ -121,7 +124,6 @@ def shortest_path(
     rows = len(grid)
     cols = len(grid[0])
 
-    x, y = exit_coord
     k = int(grid[x][y])
     path = [(x, y)]
     while grid[x][y] != 1:
@@ -130,7 +132,9 @@ def shortest_path(
             break
         neighbors = [(x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y)]
         for coord_x, coord_y in neighbors:
-            if 0 <= coord_x < rows and 0 <= coord_y < cols and grid[coord_x][coord_y] == k:
+            if 0 <= coord_x < rows \
+                    and 0 <= coord_y < cols \
+                    and grid[coord_x][coord_y] == k:
                 path.append((coord_x, coord_y))
                 x, y = coord_x, coord_y
                 break
@@ -149,7 +153,6 @@ def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) ->
     rows = len(grid)
     cols = len(grid[0])
 
-    x, y = coord
     if x in (0, rows - 1) and y in (0, cols - 1):
         return True
     if x == 0 and grid[x + 1][y] != " ":
