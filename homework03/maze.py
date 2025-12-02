@@ -19,17 +19,21 @@ def remove_wall(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) -> Li
 
     x, y = coord
     index_last_col = len(grid[0]) - 1
-    direction = choice(("up", "right"))
-    if direction == "up":
+    go_up = choice((True, False))
+    if go_up:
         if x > 1:
             grid[x - 1][y] = " "
-        elif y < index_last_col - 1:
-            grid[x][y + 1] = " "
-    else:
+            return grid
         if y < index_last_col - 1:
             grid[x][y + 1] = " "
-        elif x > 1:
-            grid[x - 1][y] = " "
+            return grid
+        return grid
+    if y < index_last_col - 1:
+        grid[x][y + 1] = " "
+        return grid
+    if x > 1:
+        grid[x - 1][y] = " "
+        return grid
     return grid
 
 
@@ -98,7 +102,7 @@ def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str,
     rows = len(grid)
     cols = len(grid[0])
 
-    nt = k + 1
+    next_k = k + 1
     for x in range(rows):
         for y in range(cols):
             if grid[x][y] != k:
@@ -107,7 +111,7 @@ def make_step(grid: List[List[Union[str, int]]], k: int) -> List[List[Union[str,
             for coord_x, coord_y in neighbors:
                 if rows > coord_x >= 0 == grid[coord_x][coord_y] \
                         and 0 <= coord_y < cols:
-                    grid[coord_x][coord_y] = nt
+                    grid[coord_x][coord_y] = next_k
     return grid
 
 
