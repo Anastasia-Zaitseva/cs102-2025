@@ -18,13 +18,9 @@ class GUI(UI):
 
     def draw_lines(self) -> None:
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (x, 0), (x, self.height)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (0, y), (self.width, y)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
 
     def draw_grid(self) -> None:
         surface = self.screen
@@ -61,9 +57,7 @@ class GUI(UI):
                     if event.key == K_SPACE:
                         paused = not paused
                     elif event.key == K_r:
-                        self.life.curr_generation = self.life.create_grid(
-                            randomize=True
-                        )
+                        self.life.curr_generation = self.life.create_grid(randomize=True)
 
                         self.life.generations = 1
                 elif event.type == MOUSEBUTTONDOWN and paused:
@@ -71,13 +65,8 @@ class GUI(UI):
                         mouse_x, mouse_y = event.pos
                         grid_x = mouse_y // self.cell_size
                         grid_y = mouse_x // self.cell_size
-                        if (
-                            0 <= grid_x < self.life.rows
-                            and 0 <= grid_y < self.life.cols
-                        ):
-                            self.life.curr_generation[grid_x][grid_y] = (
-                                1 - self.life.curr_generation[grid_x][grid_y]
-                            )
+                        if 0 <= grid_x < self.life.rows and 0 <= grid_y < self.life.cols:
+                            self.life.curr_generation[grid_x][grid_y] = 1 - self.life.curr_generation[grid_x][grid_y]
             if not paused:
                 self.life.step()
 

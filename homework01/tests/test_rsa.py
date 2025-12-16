@@ -41,6 +41,4 @@ class RSATestCase(unittest.TestCase):
         random.seed(1234567)
         self.assertEqual(((121, 323), (169, 323)), rsa.generate_keypair(17, 19))
         self.assertEqual(((142169, 1697249), (734969, 1697249)), rsa.generate_keypair(1229, 1381))
-        self.assertEqual(
-            ((9678731, 11188147), (1804547, 11188147)), rsa.generate_keypair(3259, 3433)
-        )
+        self.assertEqual(((9678731, 11188147), (1804547, 11188147)), rsa.generate_keypair(3259, 3433))
