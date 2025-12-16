@@ -2,6 +2,7 @@ import random
 import typing as tp
 from typing import List
 
+
 import pygame
 from pygame.locals import *
 
